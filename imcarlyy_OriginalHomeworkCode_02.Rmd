@@ -1,0 +1,86 @@
+---
+title: "imcarlyy_OriginalHomeworkCode_02"
+Author: "Carla Rojas"
+Date: "February 10th, 2025"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    toc: true
+    toc_depth: 2
+
+---
+
+![Titi Monkey](https://nationalzoo.si.edu/sites/default/files/styles/wide/public/animals/titimonkey_003.jpg?itok=fgWAXKYf)
+
+
+
+# Introduction
+
+Every Saturday morning, at the same time, a primatologist goes and sits in the forest to listen for titi monkey calls, counting the number of calls they hear in a 2 hour window from 5am to 7am. Based on previous knowledge, she believes that the mean number of calls she will hear in that time is exactly 15. Let X represent the appropriate Poisson random variable of the number of calls heard in each monitoring session.
+
+## 1) What is the probability that she will hear more than 8 calls during any given session?
+```{r echo=TRUE}
+x <- 9:15 #So, the possibility that she will hear from 9-15 calls.
+l = 15 # So she expects to hear on average 15 calls.
+probability_result <- dpois(x = x, lambda = l)
+probability_result
+```
+
+## 2) What is the probability that she will hear no calls in a session?
+```{r echo=TRUE}
+x <- 0 #This is the probability of her hearing 0 calls in a session?
+l <- 15 #This is what she, in general, expects to hear on average.
+probability_nocalls <- dpois(x = x, lambda = 1)
+print(probability_nocalls)
+
+```
+
+
+## 3) What is the probability that she will hear exactly 3 calls in a session?
+```{r echo=TRUE}
+x <- 3:3
+l <- 15
+probability_3calls <- dpois(x = x, lambda = 1)
+print(probability_3calls)
+```
+
+## 4) Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
+```{r echo=TRUE}
+x <- 0:30
+l <- 15
+prob_0to30 <- dpois(x = x, lambda = 1)
+barplot(prob_0to30, names.arg = x, space = 0, xlab = "x", ylab = "Pr(X = x)", main = "Poisson Distribution: Probability Mass Function")
+```
+
+
+## 5) Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions).
+```{r echo=TRUE}
+n <- 104 #This is equal to my 104 Saturday monitoring sessions. I'm telling R to simulate 104 random results.
+l <- 15
+
+simulated_results <- rpois (n = n, lambda = 1)
+print(simulated_results)
+```
+## 6A)Plot the simulated results using hist() and use xlim() to set the horizontal limits to be from 0 to 30. 
+```{r}
+hist(simulated_results, xlim = c(0,30), xlab = "x", ylab = "Pr(X = x)", main = "Histogram: Simulated Results of Exercise 5")
+```
+
+## 6B) How does your histogram compare to the shape of the probability mass function you plotted above?
+
+Answer: The graph from exercise 4 showed me the exact posibilities for each number in the the Poisson distribution, with a maximum probability of call hearings of 15. On the contrary, this is not seen in the Histogram of simulated results, as there, one could see the frequencies of how many times each call was heard in the 104 simulated results/sample. 
+
+## 7) Personal Challenges
+1. The problem number 1 was a bit of a challenge at first for me because I couldn't find an exact example of it from the Module's class. It took me a bit to figure it out, and trust that the values in x were correct. After being confident of my answer, I realized that although it is easier to establish the max. number as 15 (x <- 9:15), it also opens a variety of answer posibilities that could be correct, as long as they are above 8 (considering that the questions asks for the probability of her hearing more than 8 calls during any given session). 
+
+2. Problem number 2 gave me some trouble with a very simple function: x <- 0. At first, I struggled to obtain the output because I mistakenly set that function to run as: x <- 0:0. However, after a bit of additional research, I realized that there was no need to add more than just the value 0 to make R understand that such was the value that I wanted for the call hearing probabilities. 
+
+3. Problem 3 made me struggle when trying to understand and add the proper functions for it. I had seen this function "names.arg = x" in our classwork examples, but knowing what it was for was hard, and for a few minutes, it got me lost in my code. Similarly to the other challenges, I did some extra research and understood that it meant that the labels on the x-axis were going to be set to the values contained within my "x" vector. 
+
+4. Overall, remember what each part of the codes from the class were for, to be able to know when to add them in the boxplot/histogram was hard. I had to go over this Module again to see the output of the examples used in class, and then figure out what those functions were for.
+
+5. Finally, the language barrier was still a small issue in this homework. To solve it, just like in my previous homework, I needed to take some extra time to translate a few things and then understand what I was being asked to do/understand the terminology given in the classroom. 
+
+## 8) Bibliographic sources
+Smithsonian's National Zoo & Conservation Biology Institute. (2019). Featured Creature: Titi Monkeys. [Photograph]. Smithsonian's National Zoo. https://nationalzoo.si.edu/animals/titi-monkey
+
