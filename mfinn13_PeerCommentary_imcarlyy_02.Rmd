@@ -1,0 +1,90 @@
+---
+title: "mfinn13_PeerCommentary_imcarlyy_02"
+output: html_document
+date: "2025-02-13"
+---
+
+# Introduction
+
+Every Saturday morning, at the same time, a primatologist goes and sits in the forest to listen for titi monkey calls, counting the number of calls they hear in a 2 hour window from 5am to 7am. Based on previous knowledge, she believes that the mean number of calls she will hear in that time is exactly 15. Let X represent the appropriate Poisson random variable of the number of calls heard in each monitoring session.
+
+## 1) What is the probability that she will hear more than 8 calls during any given session?
+```{r echo=TRUE}
+x <- 9:15 #So, the possibility that she will hear from 9-15 calls.
+l = 15 # So she expects to hear on average 15 calls.
+probability_result <- dpois(x = x, lambda = l)
+probability_result
+
+#Comment: You approached this one a little bit differently than I did. It seems like what you did was calculate the individual probabilities that number of calls will be 9, 10, 11... all the way through 15. There are a couple problems with this approach. The first is that the question asks what the probability is that the researcher will hear more than 8 calls, and while the mean is 15, it is possible for her to hear more than 15 calls. The other problem is that your code returns the probabilities individually instead of adding them up. To solve both of these problems, I think you might want to use the ppois() function. What this function does is calculate the probability that a random variable takes on a value that is equal or less than an inputted value. Essentially, this means that if you do ppois(8, 15), where 8 is the number we're stopping at, and 15 is the mean, it will give you the probability that the researcher hears 8 or less calls. Then, you can do 1 minus that probability to give you the probability that she will hear more than 8 calls, because these outcomes are complementary. If that doesn't make sense text me and I'd be happy to try to explain better.  
+```
+
+## 2) What is the probability that she will hear no calls in a session?
+```{r echo=TRUE}
+x <- 0 #This is the probability of her hearing 0 calls in a session?
+l <- 15 #This is what she, in general, expects to hear on average.
+probability_nocalls <- dpois(x = x, lambda = 1)
+print(probability_nocalls)
+
+#Comment: this is super close to correct! Your using the correct function and everything, I think the only problem is that lambda is set to 1 instead of l (which is equal to 15).
+```
+
+
+## 3) What is the probability that she will hear exactly 3 calls in a session?
+```{r echo=TRUE}
+x <- 3:3
+l <- 15
+probability_3calls <- dpois(x = x, lambda = 1)
+print(probability_3calls)
+
+#Comment: Again, the problem here looks to be that lambda is set to 1 instead of l (which is equal to 15). It should work if you make that change. 
+```
+
+## 4) Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
+```{r echo=TRUE}
+x <- 0:30
+l <- 15
+prob_0to30 <- dpois(x = x, lambda = 1)
+barplot(prob_0to30, names.arg = x, space = 0, xlab = "x", ylab = "Pr(X = x)", main = "Poisson Distribution: Probability Mass Function")
+
+#Comment: Again, super close! I think the problem is lambda again. It should be set to l or 15.
+```
+
+
+## 5) Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions).
+```{r echo=TRUE}
+n <- 104 #This is equal to my 104 Saturday monitoring sessions. I'm telling R to simulate 104 random results.
+l <- 15
+
+simulated_results <- rpois(n = n, lambda = 1)
+print(simulated_results)
+
+#Comment: It's lambda again! Silly lambda. Lambda represents the mean (and because we are in a poisson distribution, it also represents the variance). On line 58, lambda should be set to l or 15. 
+```
+## 6A)Plot the simulated results using hist() and use xlim() to set the horizontal limits to be from 0 to 30. 
+```{r}
+hist(simulated_results, xlim = c(0,30), xlab = "x", ylab = "Pr(X = x)", main = "Histogram: Simulated Results of Exercise 5")
+
+#Comment: I think if you fix your code in part 5, which I've commented on, the plot should be correct. It should be look like a bell curve centered around 15. 
+```
+
+## 6B) How does your histogram compare to the shape of the probability mass function you plotted above?
+
+Answer: The graph from exercise 4 showed me the exact posibilities for each number in the the Poisson distribution, with a maximum probability of call hearings of 15. On the contrary, this is not seen in the Histogram of simulated results, as there, one could see the frequencies of how many times each call was heard in the 104 simulated results/sample. 
+
+#Comment: I think that the shape of the distributions should pretty much be the same, because they are both coming from a poisson distribution with lambda = 15. I think because 104 is not a huge number there may be some small differences between the distributions, but if we were to increase n to like 10,000 I think they would look almost identical. 
+
+## 7) Personal Challenges
+1. The problem number 1 was a bit of a challenge at first for me because I couldn't find an exact example of it from the Module's class. It took me a bit to figure it out, and trust that the values in x were correct. After being confident of my answer, I realized that although it is easier to establish the max. number as 15 (x <- 9:15), it also opens a variety of answer posibilities that could be correct, as long as they are above 8 (considering that the questions asks for the probability of her hearing more than 8 calls during any given session). 
+
+2. Problem number 2 gave me some trouble with a very simple function: x <- 0. At first, I struggled to obtain the output because I mistakenly set that function to run as: x <- 0:0. However, after a bit of additional research, I realized that there was no need to add more than just the value 0 to make R understand that such was the value that I wanted for the call hearing probabilities. 
+
+3. Problem 3 made me struggle when trying to understand and add the proper functions for it. I had seen this function "names.arg = x" in our classwork examples, but knowing what it was for was hard, and for a few minutes, it got me lost in my code. Similarly to the other challenges, I did some extra research and understood that it meant that the labels on the x-axis were going to be set to the values contained within my "x" vector.
+
+4. Overall, remember what each part of the codes from the class were for, to be able to know when to add them in the boxplot/histogram was hard. I had to go over this Module again to see the output of the examples used in class, and then figure out what those functions were for.
+
+5. Finally, the language barrier was still a small issue in this homework. To solve it, just like in my previous homework, I needed to take some extra time to translate a few things and then understand what I was being asked to do/understand the terminology given in the classroom. 
+
+#Comment: This homework was hard! I didn't have the exact same challenges as you but I definitely ran into some road blocks. I think overall your code shows a pretty good grasp of the statistical and coding concepts of this homework. Your biggest issue it seemed was just setting lambda, which is a super quick fix. I think most of your code will produce the right answer once you switch lambda. Overall, great job Carly!
+
+## 8) Bibliographic sources
+Smithsonian's National Zoo & Conservation Biology Institute. (2019). Featured Creature: Titi Monkeys. [Photograph]. Smithsonian's National Zoo. https://nationalzoo.si.edu/animals/titi-monkey
