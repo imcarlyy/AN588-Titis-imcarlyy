@@ -75,7 +75,7 @@ Answer: The graph from exercise 4 showed me the exact posibilities for each numb
 
 2. Problem number 2 gave me some trouble with a very simple function: x <- 0. At first, I struggled to obtain the output because I mistakenly set that function to run as: x <- 0:0. However, after a bit of additional research, I realized that there was no need to add more than just the value 0 to make R understand that such was the value that I wanted for the call hearing probabilities. 
 
-3. Problem 3 made me struggle when trying to understand and add the proper functions for it. I had seen this function "names.arg = x" in our classwork examples, but knowing what it was for was hard, and for a few minutes, it got me lost in my code. Similarly to the other challenges, I did some extra research and understood that it meant that the labels on the x-axis were going to be set to the values contained within my "x" vector. 
+3. Problem 3 made me struggle when trying to understand and add the proper functions for it. I had seen this function "names.arg = x" in our classwork examples, but knowing what it was for was hard, and for a few minutes, it got me lost in my code. Similarly to the other challenges, I did some extra research and understood that it meant that the labels on the x-axis were going to be set to the values contained within my "x" vector.
 
 4. Overall, remember what each part of the codes from the class were for, to be able to know when to add them in the boxplot/histogram was hard. I had to go over this Module again to see the output of the examples used in class, and then figure out what those functions were for.
 
