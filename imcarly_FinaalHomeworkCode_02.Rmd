@@ -8,3 +8,59 @@ output:
     toc: true
     toc_depth: 2
 ---
+![Titi Monkey](https://nationalzoo.si.edu/sites/default/files/styles/wide/public/animals/titimonkey_003.jpg?itok=fgWAXKYf)
+
+# Introduction
+
+Every Saturday morning, at the same time, a primatologist goes and sits in the forest to listen for titi monkey calls, counting the number of calls they hear in a 2 hour window from 5am to 7am. Based on previous knowledge, she believes that the mean number of calls she will hear in that time is exactly 15. Let X represent the appropriate Poisson random variable of the number of calls heard in each monitoring session.
+
+## 1) What is the probability that she will hear more than 8 calls during any given session?
+```{r echo=TRUE}
+x <- 8 #Considering Matteo's feedback: Initially, 8 will give you the probability that the researcher hears 8 or less calls
+l = 15 # So she expects to hear on average 15 calls.
+probability_result <- 1- ppois(x, lambda = l) #Matt's fb: Add 1 - because that will give me the probability that she will hear MORE than 8 calls.
+probability_result
+```
+## 2) What is the probability that she will hear no calls in a session?
+```{r echo=TRUE}
+x <- 0 #This is the probability of her hearing 0 calls in a session.
+l <- 15 #This is what she, in general, expects to hear on average.
+probability_nocalls <- dpois(x = x, lambda = l)
+print(probability_nocalls)
+
+```
+## 3) What is the probability that she will hear exactly 3 calls in a session?
+```{r echo=TRUE}
+x <- 3:3
+l <- 15
+probability_3calls <- dpois(x = x, lambda = l)
+print(probability_3calls)
+```
+## 4) Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
+```{r echo=TRUE}
+x <- 0:30
+l <- 15
+prob_0to30 <- dpois(x = x, lambda = l)
+barplot(prob_0to30, names.arg = x, space = 0, xlab = "x", ylab = "Pr(X = x)", main = "Poisson Distribution: Probability Mass Function")
+```
+
+## 5) Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions).
+```{r echo=TRUE}
+n <- 104 #This is equal to my 104 Saturday monitoring sessions. I'm telling R to simulate 104 random results.
+l <- 15
+
+simulated_results <- rpois (n = n, lambda = l) #Matt's fb: Lambda represents the mean (and because we are in a poisson distribution, it also represents the variance). Please, don't forget lambda = l and NOT 1 haha.
+print(simulated_results)
+```
+
+## 6A)Plot the simulated results using hist() and use xlim() to set the horizontal limits to be from 0 to 30. 
+```{r}
+hist(simulated_results, xlim = c(0,30), xlab = "x", ylab = "Pr(X = x)", main = "Histogram: Simulated Results of Exercise 5")
+```
+
+
+## 6B) How does your histogram compare to the shape of the probability mass function you plotted above?
+Considering the changes made in this final homework code, the shape of the distribution in both the histogram and the P. mass function are very similar. The only difference is that the histogram is slighty more variable because of the 104 random samples. However, overall it is clear that they both show a peak around 15 and share a similar shape and general trend.
+
+## 8) Bibliographic sources
+Smithsonian's National Zoo & Conservation Biology Institute. (2019). Featured Creature: Titi Monkeys. [Photograph]. Smithsonian's National Zoo. https://nationalzoo.si.edu/animals/titi-monkey
