@@ -1,0 +1,10 @@
+---
+title: "imcarlyy_OriginalHomeworkCode_02"
+Author: "Carla Rojas"
+Date: "February 10th, 2025"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    toc: true
+    toc_depth: 2
+---
